@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "better-sqlite3": "^12.10.0",
     "jose": "^6.2.3",
     "next": "16.2.9",
     "react": "19.2.4",
@@ -20,7 +19,6 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.20",
-    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

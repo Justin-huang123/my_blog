@@ -1,16 +1,10 @@
-import { statements } from "@/lib/db";
+import { storage } from "@/lib/storage";
 import Link from "next/link";
 
-// Server Component：直接在服务器查数据库，不需要 API
+// Server Component：直接读 JSON 文件，不需要 API
 export default async function HomePage() {
   // 查询所有已发布的文章，最新排前面
-  const posts = statements.getAllPublishedPosts.all() as Array<{
-    id: number;
-    title: string;
-    slug: string;
-    excerpt: string;
-    created_at: string;
-  }>;
+  const posts = storage.getAllPublished();
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-8">

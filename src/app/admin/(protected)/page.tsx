@@ -1,15 +1,9 @@
-import { statements } from "@/lib/db";
+import { storage } from "@/lib/storage";
 import Link from "next/link";
 import { DeleteButton } from "../_components/DeleteButton";
 
 export default async function AdminDashboard() {
-  const posts = statements.getAllPosts.all() as Array<{
-    id: number;
-    title: string;
-    slug: string;
-    published: number;
-    created_at: string;
-  }>;
+  const posts = storage.getAll();
 
   return (
     <main>

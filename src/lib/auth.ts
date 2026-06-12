@@ -1,7 +1,6 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { statements } from "./db";
 
 // 把 SESSION_SECRET 从文本转成二进制密钥（jose 库要求的格式）
 const secret = new TextEncoder().encode(process.env.SESSION_SECRET);
@@ -58,9 +57,8 @@ export async function requireAuth() {
 }
 
 // ====== 验证管理员密码 ======
+// 密码存在环境变量 ADMIN_PASSWORD 中，不依赖数据库
 export async function verifyPassword(password: string): Promise<boolean> {
-  const row = statements.getSetting.get("admin_password") as
-    | { value: string }
-    | undefined;
-  return row?.value === password;
+  const correctPassword = process.env.ADMIN_PASSWORD || "admin123";
+  return password === correctPassword;
 }

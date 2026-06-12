@@ -1,4 +1,4 @@
-import { statements } from "@/lib/db";
+import { storage } from "@/lib/storage";
 import { notFound } from "next/navigation";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import Link from "next/link";
@@ -12,16 +12,7 @@ export default async function PostPage({
 }) {
   const { slug } = await params;
 
-  const post = statements.getPostBySlug.get(slug) as
-    | {
-        id: number;
-        title: string;
-        content: string;
-        published: number;
-        created_at: string;
-        updated_at: string;
-      }
-    | undefined;
+  const post = storage.getBySlug(slug);
 
   // 文章不存在 或 没发布（从 URL 直接访问）→ 显示 404
   if (!post || post.published !== 1) {

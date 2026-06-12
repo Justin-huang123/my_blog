@@ -1,4 +1,4 @@
-import { statements } from "@/lib/db";
+import { storage } from "@/lib/storage";
 import { notFound } from "next/navigation";
 import { PostForm } from "../../../_components/PostForm";
 
@@ -9,16 +9,7 @@ export default async function EditPostPage({
 }) {
   const { id } = await params;
 
-  const post = statements.getPostById.get(Number(id)) as
-    | {
-        id: number;
-        title: string;
-        slug: string;
-        content: string;
-        excerpt: string;
-        published: number;
-      }
-    | undefined;
+  const post = storage.getById(Number(id));
 
   if (!post) {
     notFound();
